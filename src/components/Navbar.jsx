@@ -41,11 +41,12 @@ export default function Navbar({ activePage, setActivePage, setSelectedItem }) {
   const [visible, setVisible] = useState(true);
   const [isNavExpanded, setIsNavExpanded] = useState(false);
 
+  // Handle scroll behavior (Hide on scroll down, Show on scroll up)
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
 
-      // Keep navbar visible if the mobile menu is open
+      // Keep visible if mobile menu is actively open
       if (isNavExpanded) {
         setVisible(true);
         return;
@@ -64,15 +65,32 @@ export default function Navbar({ activePage, setActivePage, setSelectedItem }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [prevScrollPos, isNavExpanded]);
 
+  // Force close the mobile menu & any expanded dropdowns
   const closeMenu = () => {
     setIsNavExpanded(false);
+    
+    // Close Bootstrap dropdown menus programmatically if present
+    const openDropdowns = document.querySelectorAll('.dropdown-menu.show');
+    openDropdowns.forEach((dropdown) => dropdown.classList.remove('show'));
   };
 
   const handleItemClick = (e, item) => {
     e.preventDefault();
     setSelectedItem(item);
     setActivePage('detail');
-    closeMenu();
+    closeMenu(); // Collapse back to hamburger lines
+  };
+
+  const handleBrandClick = () => {
+    setActivePage('home');
+    setSelectedItem(null);
+    closeMenu(); // Collapse back to hamburger lines
+  };
+
+  const handleAboutClick = () => {
+    setActivePage('about');
+    setSelectedItem(null);
+    closeMenu(); // Collapse back to hamburger lines
   };
 
   const navbarStyle = {
@@ -89,11 +107,12 @@ export default function Navbar({ activePage, setActivePage, setSelectedItem }) {
         <span 
           className="navbar-brand fst-italic fs-2 fw-normal text-white" 
           style={{ cursor: 'pointer', fontFamily: 'serif' }} 
-          onClick={() => { setActivePage('home'); setSelectedItem(null); closeMenu(); }}
+          onClick={handleBrandClick}
         >
           Khanak
         </span>
 
+        {/* Mobile Menu Button */}
         <button
           className="navbar-toggler border-0 shadow-none"
           type="button"
@@ -105,7 +124,7 @@ export default function Navbar({ activePage, setActivePage, setSelectedItem }) {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* --- OVERLAY MENU FOR MOBILE FIX --- */}
+        {/* Mobile Overlay Menu Container */}
         <div 
           className={`collapse navbar-collapse ${isNavExpanded ? 'show' : ''}`} 
           id="navbarNav"
@@ -152,7 +171,7 @@ export default function Navbar({ activePage, setActivePage, setSelectedItem }) {
               <span
                 className={`nav-link text-white fw-bold ${activePage === 'about' ? 'active' : ''}`}
                 style={{ cursor: 'pointer' }}
-                onClick={() => { setActivePage('about'); setSelectedItem(null); closeMenu(); }}
+                onClick={handleAboutClick}
               >
                 About
               </span>
