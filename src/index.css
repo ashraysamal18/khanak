@@ -1,0 +1,392 @@
+/* ===========================
+   FONTS & VARIABLES
+=========================== */
+
+:root {
+  --ink: #0a0a0a;
+  --paper: #ffffff;
+  --paper-dim: #f6f6f4;
+  --line: rgba(255, 255, 255, 0.14);
+  --line-dark: rgba(10, 10, 10, 0.1);
+  --muted: #8a8a8a;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ===========================
+   NAVBAR
+=========================== */
+
+.custom-navbar {
+  background: var(--ink);
+  padding: 34px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.navbar-brand {
+  color: var(--paper);
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 38px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.navbar-brand:hover {
+  color: var(--paper);
+}
+
+.navbar-nav {
+  gap: 44px;
+}
+
+.nav-link {
+  color: var(--paper);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  position: relative;
+  padding-bottom: 4px !important;
+  cursor: pointer;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--paper);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus,
+.nav-link.active {
+  color: var(--paper);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after,
+.nav-item.show .nav-link::after {
+  transform: scaleX(1);
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.navbar-toggler {
+  border: none;
+  padding: 0;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+/* ===========================
+   DROPDOWNS
+=========================== */
+
+.dropdown-menu {
+  background: var(--ink);
+  border: none;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.18);
+  padding: 22px 28px;
+  margin-top: 18px;
+}
+
+.dropdown-item {
+  color: var(--paper);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  line-height: 2.1;
+  padding: 0;
+  background: transparent;
+  white-space: normal;
+  opacity: 0.55;
+  transition: opacity 0.25s;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  color: var(--paper);
+  background: transparent;
+  opacity: 1;
+}
+
+@media (min-width: 992px) {
+  .navbar-nav .dropdown-menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    min-width: max-content;
+    display: none;
+    margin-top: 0;
+    padding-top: 30px;
+  }
+
+  .navbar-nav .dropdown:hover > .dropdown-menu {
+    display: block;
+  }
+}
+
+/* ===========================
+   COLLECTION SECTION
+=========================== */
+
+.collection-section {
+  position: relative;
+  padding: 90px 0 110px;
+}
+
+.collection-section .row {
+  counter-reset: look;
+}
+
+.collection-card {
+  transition: 0.4s;
+}
+
+.collection-card-frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-dim);
+}
+
+.collection-card-frame::before {
+  counter-increment: look;
+  content: '0' counter(look);
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+  color: var(--paper);
+  font-size: 12px;
+  letter-spacing: 2px;
+  mix-blend-mode: difference;
+}
+
+.collection-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.view-tag {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  z-index: 2;
+  color: var(--paper);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: 0.35s ease;
+  mix-blend-mode: difference;
+}
+
+.collection-card:hover .view-tag {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.collection-card:hover img {
+  transform: scale(1.04);
+}
+
+.collection-card-caption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-dark);
+}
+
+.collection-card-caption h5 {
+  color: var(--ink);
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: 0.3px;
+  margin: 0;
+}
+
+@media (min-width: 992px) {
+  .custom-navbar:hover ~ .collection-section .collection-card {
+    opacity: 0.25;
+  }
+
+  .custom-navbar:hover ~ .collection-section .collection-card:hover {
+    opacity: 1;
+  }
+}
+
+/* ===========================
+   ABOUT SECTION
+=========================== */
+
+.about-section {
+  background: var(--paper-dim);
+  padding: 70px 0;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 560px) minmax(0, 620px);
+  gap: 80px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 48px;
+  align-items: start;
+}
+
+.about-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(1) contrast(1.05);
+}
+
+.about-content {
+  padding-top: 12px;
+}
+
+.about-content p {
+  font-size: 19px;
+  line-height: 1.75;
+  font-weight: 300;
+  color: var(--ink);
+  margin-bottom: 28px;
+}
+
+.about-content em {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.about-contact {
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line-dark);
+}
+
+.enquire {
+  font-size: 16px;
+  margin-bottom: 14px !important;
+}
+
+.instagram-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font-size: 16px;
+  letter-spacing: 0.3px;
+  transition: opacity 0.25s;
+}
+
+.instagram-link:hover {
+  opacity: 0.6;
+  color: var(--ink);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 991px) {
+  .about-section {
+    padding: 40px 0;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 0 24px;
+  }
+
+  .about-content p {
+    font-size: 17px;
+  }
+
+  .custom-navbar {
+    padding: 26px 0;
+  }
+
+  .navbar-nav {
+    gap: 16px;
+    margin-top: 22px;
+  }
+
+  .navbar-brand {
+    font-size: 32px;
+  }
+
+  .collection-section {
+    padding: 56px 0 70px;
+  }
+
+  .collection-card img {
+    height: 420px;
+  }
+
+  .dropdown-menu {
+    background: transparent;
+    box-shadow: none;
+    text-align: left;
+    margin-top: 8px;
+    margin-bottom: 6px;
+    margin-left: 4px;
+    padding: 0;
+  }
+
+  .dropdown-item {
+    line-height: 1.9;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-brand {
+    font-size: 28px;
+  }
+
+  .collection-card img {
+    height: 330px;
+  }
+
+  .collection-card-caption h5 {
+    font-size: 18px;
+  }
+
+  .dropdown-item {
+    font-size: 13px;
+  }
+}
