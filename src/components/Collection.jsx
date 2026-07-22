@@ -48,9 +48,11 @@ export default function Collection({ onSelectCollection }) {
   return (
     <section className="collection-section">
       <div className="container">
-        <div className="row g-4 g-lg-5">
+        {/* Adjusted gutters for better mobile spacing */}
+        <div className="row g-2 g-md-4 g-lg-5">
           {collectionsData.map((item) => (
-            <div className="col-lg-4 col-12" key={item.id}>
+            /* col-6 gives 2 items per row on mobile, col-lg-4 gives 3 items per row on desktop */
+            <div className="col-6 col-lg-4" key={item.id}>
               <div className="collection-card">
                 <a
                   href="#"
