@@ -70,12 +70,14 @@ const navCategories = [
 export default function Navbar({ activePage, setActivePage, setSelectedItem }) {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  
+  // Track mobile navbar open/close state directly in React
+  const [isNavExpanded, setIsNavExpanded] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
 
-      // Always show at the top of the page, hide on scroll down, show on scroll up
       if (currentScrollPos < 10) {
         setVisible(true);
       } else {
@@ -89,10 +91,16 @@ export default function Navbar({ activePage, setActivePage, setSelectedItem }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [prevScrollPos]);
 
+  // Helper function to close the menu
+  const closeMenu = () => {
+    setIsNavExpanded(false);
+  };
+
   const handleItemClick = (e, item) => {
     e.preventDefault();
     setSelectedItem(item);
     setActivePage('detail');
+    closeMenu(); // Collapses menu on click
   };
 
   const navbarStyle = {
@@ -109,24 +117,32 @@ export default function Navbar({ activePage, setActivePage, setSelectedItem }) {
         <span 
           className="navbar-brand" 
           style={{ cursor: 'pointer' }} 
-          onClick={() => { setActivePage('home'); setSelectedItem(null); }}
+          onClick={() => { 
+            setActivePage('home'); 
+            setSelectedItem(null); 
+            closeMenu(); 
+          }}
         >
           Khanak
         </span>
 
+        {/* Manual toggle button */}
         <button
           className="navbar-toggler"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
           aria-controls="navbarNav"
-          aria-expanded="false"
+          aria-expanded={isNavExpanded}
           aria-label="Toggle navigation"
+          onClick={() => setIsNavExpanded(!isNavExpanded)}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarNav">
+        {/* Conditionally append 'show' class when expanded */}
+        <div 
+          className={`collapse navbar-collapse ${isNavExpanded ? 'show' : ''}`} 
+          id="navbarNav"
+        >
           <ul className="navbar-nav ms-auto">
             {navCategories.map((category) => (
               <li className="nav-item dropdown" key={category.id}>
@@ -160,7 +176,11 @@ export default function Navbar({ activePage, setActivePage, setSelectedItem }) {
               <span
                 className={`nav-link ${activePage === 'about' ? 'active' : ''}`}
                 style={{ cursor: 'pointer' }}
-                onClick={() => { setActivePage('about'); setSelectedItem(null); }}
+                onClick={() => { 
+                  setActivePage('about'); 
+                  setSelectedItem(null); 
+                  closeMenu(); 
+                }}
               >
                 About
               </span>
