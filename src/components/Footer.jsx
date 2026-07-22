@@ -9,11 +9,11 @@ export default function Footer({ onNavigateHome, onNavigateAbout }) {
         <div className="footer-row">
 
           <a href="mailto:hello@khanak.com" className="footer-contact">
-            hello@khanak.com
+            kanishkakasana22@gmail.com
           </a>
 
           <a
-            href="#"
+            href="https://www.instagram.com/khanak_22/"
             className="footer-instagram"
             target="_blank"
             rel="noopener noreferrer"
