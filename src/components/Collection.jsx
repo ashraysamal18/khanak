@@ -2,7 +2,6 @@ import React from 'react';
 
 const collectionsData = [
   {
-    id: 1,
     title: 'Manifest',
     image:
       'https://plus.unsplash.com/premium_photo-1673758905770-a62f4309c43c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bW9kZWx8ZW58MHx8MHx8fDA%3D',
