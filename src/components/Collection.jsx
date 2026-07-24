@@ -2,6 +2,7 @@ import React from 'react';
 
 const collectionsData = [
   {
+    id: 1,
     title: 'Manifest',
     image:
       'https://plus.unsplash.com/premium_photo-1673758905770-a62f4309c43c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bW9kZWx8ZW58MHx8MHx8fDA%3D',
@@ -47,10 +48,9 @@ export default function Collection({ onSelectCollection }) {
   return (
     <section className="collection-section">
       <div className="container">
-        {/* Adjusted gutters for better mobile spacing */}
+        {/* col-6 keeps 2 columns on mobile, col-lg-4 gives 3 columns on desktop */}
         <div className="row g-2 g-md-4 g-lg-5">
           {collectionsData.map((item) => (
-            /* col-6 gives 2 items per row on mobile, col-lg-4 gives 3 items per row on desktop */
             <div className="col-6 col-lg-4" key={item.id}>
               <div className="collection-card">
                 <a
@@ -60,7 +60,7 @@ export default function Collection({ onSelectCollection }) {
                 >
                   <div className="collection-card-frame">
                     <img src={item.image} alt={item.title} />
-                    <span className="view-tag">View look</span>
+                    <span className="view-tag">VIEW LOOK</span>
                   </div>
                 </a>
                 <div className="collection-card-caption">
