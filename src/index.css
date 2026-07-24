@@ -162,9 +162,7 @@ a {
   padding: 90px 0 110px;
 }
 
-.collection-section .row {
-  counter-reset: look;
-}
+/* Counter reset removed from here */
 
 .collection-card {
   transition: 0.4s;
@@ -172,26 +170,17 @@ a {
 
 .collection-card-frame {
   position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3; /* Sets clean rectangular ratio for all screens */
   overflow: hidden;
   background: var(--paper-dim);
 }
 
-.collection-card-frame::before {
-  counter-increment: look;
-  content: '0' counter(look);
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 2;
-  color: var(--paper);
-  font-size: 12px;
-  letter-spacing: 2px;
-  mix-blend-mode: difference;
-}
+/* .collection-card-frame::before pseudo-element for numbers REMOVED */
 
 .collection-card img {
   width: 100%;
-  height: 300px;
+  height: 100%; /* Fills the aspect ratio frame */
   object-fit: cover;
   display: block;
   transition: transform 0.6s ease;
@@ -354,9 +343,7 @@ a {
     padding: 56px 0 70px;
   }
 
-  .collection-card img {
-    height: 420px;
-  }
+  /* Fixed pixel heights removed so aspect-ratio handles mobile automatically */
 
   .dropdown-menu {
     background: transparent;
@@ -378,9 +365,7 @@ a {
     font-size: 28px;
   }
 
-  .collection-card img {
-    height: 330px;
-  }
+  /* Fixed pixel heights removed so aspect-ratio handles small screens */
 
   .collection-card-caption h5 {
     font-size: 18px;
