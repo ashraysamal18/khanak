@@ -381,7 +381,7 @@ export const portfolioItemsData = {
       '/images/Fashion/sania/sa4.jpeg',
       '/images/Fashion/sania/sa5.jpeg',
       '/images/Fashion/sania/sa6.jpeg',
-      '/images/Fashion/sania/sa7.,jpeg',
+      '/images/Fashion/sania/sa7.jpeg',
       '/images/Fashion/sania/sa8.jpeg',
       '/images/Fashion/sania/sa9.jpeg',
       '/images/Fashion/sania/sa10.jpeg',
@@ -440,6 +440,16 @@ export const portfolioItemsData = {
     images: []
   },
 
+// EDITORIAL CATEGORY
+
+  'Underneat': {
+    category: 'Fashion / Campaign',
+    subtitle: 'M I R R O R E D',
+    description: 'A visual exploration of dualities, rich textures, and traditional elegance.',
+    images: []
+  },
+  
+// CELEBRITY CATEGORY
   'So Perfect': {
     category: 'Celebrity',
     subtitle: 'M I R R O R E D',

@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { portfolioItemsData } from '../data/portfolioItemsData';
 
 export default function DetailPage({
   title,
   onBack,
-  // --- ADJUSTABLE PROPS ---
-  heroMinHeight = '60vh',        // floor on mobile so hero never gets cramped
-  heroMaxHeight = '85vh',        // ceiling on desktop
+  heroMinHeight = '60vh',
+  heroMaxHeight = '85vh',
   cardMaxWidth = 'min(340px, 80vw)',
   rightBgColor = '#FFFFFF',
   galleryColumns = 'col-6 col-md-4 col-lg-3',
-  galleryAspectRatio = '4 / 5',  // replaces fixed px height, scales at every width
+  galleryAspectRatio = '4 / 5',
 }) {
+  // Reset window scroll position whenever 'title' changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [title]);
+
   // Safe lookup
   const pageContent =
     portfolioItemsData?.[title] ||
@@ -20,16 +24,13 @@ export default function DetailPage({
 
   const images = pageContent.images || [];
 
-  // --- POSITION SWAP ---
-  // Image 1 (images[0]) goes to the right panel card
-  // Image 2 (images[1]) goes to the left full-height cover
   const heroLeftImage = images[1] || images[0];
   const heroRightImage = images[0];
   const feedImages = images.slice(2);
 
   return (
     <div className="w-100 min-vh-100 bg-white">
-      {/* Back Button (if provided) */}
+      {/* Back Button */}
       {onBack && (
         <button
           onClick={onBack}
@@ -49,7 +50,7 @@ export default function DetailPage({
       `}</style>
       <div className="container-fluid p-0">
         <div className="row g-0 align-items-stretch flex-column-reverse flex-md-row hero-row">
-          {/* Left Column: Cover Image, inset with the same margin as the gallery images */}
+          {/* Left Column */}
           <div className="col-12 col-md-6 p-3 p-sm-4 p-lg-5">
             {heroLeftImage && (
               <div className="w-100 h-100 overflow-hidden">
@@ -69,12 +70,11 @@ export default function DetailPage({
             )}
           </div>
 
-          {/* Right Column: Centered Inset Card + Text */}
+          {/* Right Column */}
           <div
             className="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center p-3 p-sm-4 p-lg-5 text-center"
             style={{ backgroundColor: rightBgColor }}
           >
-            {/* Adjustable Inset Image Card */}
             {heroRightImage && (
               <div
                 className="mb-3 mb-md-4 shadow-sm w-100 overflow-hidden mx-auto"
