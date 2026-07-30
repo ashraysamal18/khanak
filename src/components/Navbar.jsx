@@ -84,13 +84,30 @@ export default function Navbar({ activePage, setActivePage, setSelectedItem }) {
 
   const navRef = useRef(null);
 
+  // Matches Bootstrap's `navbar-expand-lg` breakpoint: below this width the
+  // navbar is collapsed behind the hamburger button, above it the full menu
+  // is always shown inline.
+  const MOBILE_BREAKPOINT = 992;
+
   useEffect(() => {
     const handleScroll = () => {
-      // While the mobile menu or a dropdown is open, leave the navbar alone.
-      // Otherwise scrolling through a long dropdown list on phone (which is
-      // just page scroll) triggers the hide-on-scroll-down logic below and
-      // slides the navbar - and the open menu attached to it - off screen,
-      // making it look like the menu "won't open".
+      // The hide-on-scroll transform (translateY(-100%)) moves the ENTIRE
+      // navbar - including the hamburger button - off screen. On phone
+      // that's fatal: once you've scrolled down, the toggler you need to
+      // tap to open the menu is no longer there to tap, and any trailing
+      // scroll/touchmove event re-hides the bar right after you manage to
+      // open it, which looks like the menu "auto-closing". Auto-hide only
+      // makes sense on desktop, where the nav links are always inline and
+      // there's no toggler to lose. So on phone-width screens we simply
+      // never hide the navbar on scroll.
+      if (window.innerWidth < MOBILE_BREAKPOINT) {
+        setVisible(true);
+        setPrevScrollPos(window.scrollY);
+        return;
+      }
+
+      // While the mobile menu or a dropdown is open, leave the navbar alone
+      // too (relevant on desktop if a dropdown is open near the breakpoint).
       if (isNavExpanded || openDropdownId) {
         setVisible(true);
         setPrevScrollPos(window.scrollY);
@@ -109,7 +126,11 @@ export default function Navbar({ activePage, setActivePage, setSelectedItem }) {
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, [prevScrollPos, isNavExpanded, openDropdownId]);
 
   // Close an open dropdown when tapping/clicking anywhere outside the navbar.
