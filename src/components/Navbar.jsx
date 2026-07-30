@@ -86,6 +86,17 @@ export default function Navbar({ activePage, setActivePage, setSelectedItem }) {
 
   useEffect(() => {
     const handleScroll = () => {
+      // While the mobile menu or a dropdown is open, leave the navbar alone.
+      // Otherwise scrolling through a long dropdown list on phone (which is
+      // just page scroll) triggers the hide-on-scroll-down logic below and
+      // slides the navbar - and the open menu attached to it - off screen,
+      // making it look like the menu "won't open".
+      if (isNavExpanded || openDropdownId) {
+        setVisible(true);
+        setPrevScrollPos(window.scrollY);
+        return;
+      }
+
       const currentScrollPos = window.scrollY;
 
       if (currentScrollPos < 10) {
@@ -99,7 +110,7 @@ export default function Navbar({ activePage, setActivePage, setSelectedItem }) {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [prevScrollPos]);
+  }, [prevScrollPos, isNavExpanded, openDropdownId]);
 
   // Close an open dropdown when tapping/clicking anywhere outside the navbar.
   // This is what makes single-tap-to-open / tap-elsewhere-to-close work
