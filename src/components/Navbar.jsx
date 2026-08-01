@@ -27,7 +27,7 @@ const navCategories = [
       'Sheena Trehan',
       'The Designer hype',
       'Tulsi Studio',
-      'Twinkle Hanswal',
+      'Twinkle Hanspal',
       'Underneat',
     ],
   },

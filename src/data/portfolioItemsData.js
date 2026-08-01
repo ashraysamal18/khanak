@@ -419,14 +419,27 @@ export const portfolioItemsData = {
     ]
   },
 
-  'Tulsi Studio': {
+'Tulsi Studio': {
     category: 'Fashion / Campaign',
     subtitle: 'M I R R O R E D',
     description: 'A visual exploration of dualities, rich textures, and traditional elegance.',
-    images: []
+    images: [
+      '/images/Fashion/tulsi/t0.jpg',
+      '/images/Fashion/tulsi/t1.jpg',
+      '/images/Fashion/tulsi/t2.jpg',
+      '/images/Fashion/tulsi/t3.jpg',
+      '/images/Fashion/tulsi/t4.jpg',
+      '/images/Fashion/tulsi/t5.jpg',
+      '/images/Fashion/tulsi/t6.jpg',
+      '/images/Fashion/tulsi/t7.jpg',
+      '/images/Fashion/tulsi/t8.jpg',
+      '/images/Fashion/tulsi/t9.jpg',
+      '/images/Fashion/tulsi/t10.jpg',
+      '/images/Fashion/tulsi/t11.jpg',
+    ]
   },
 
-  'Twinkle Hanswal': {
+  'Twinkle Hanspal': {
     category: 'Fashion / Campaign',
     subtitle: 'M I R R O R E D',
     description: 'A visual exploration of dualities, rich textures, and traditional elegance.',
@@ -437,7 +450,14 @@ export const portfolioItemsData = {
     category: 'Fashion / Campaign',
     subtitle: 'M I R R O R E D',
     description: 'A visual exploration of dualities, rich textures, and traditional elegance.',
-    images: []
+    images: [
+      '/images/Fashion/underneat/U0.jpg',
+      '/images/Fashion/underneat/u1.jpg',
+      '/images/Fashion/underneat/u2.jpg',
+      '/images/Fashion/underneat/u3.jpg', 
+      '/images/Fashion/underneat/u4.jpg',
+      '/images/Fashion/underneat/u5.jpg',
+    ]
   },
 
 // EDITORIAL CATEGORY
