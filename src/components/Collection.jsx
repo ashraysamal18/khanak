@@ -27,9 +27,9 @@ const collectionsData = [
   },
   {
     id: 5,
-    title: 'Fabindia',
+    title: 'Cord',
     image:
-      'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bW9kZWx8ZW58MHx8MHx8fDA%3D',
+      '/images/Fashion/Cord/c1.jpg',
   },
   {
     id: 6,
